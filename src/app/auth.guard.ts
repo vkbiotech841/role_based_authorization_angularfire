@@ -14,20 +14,36 @@ export class AuthGuard implements CanActivate {
     private router: Router
   ) { }
 
+  // canActivate(
+  //   route: ActivatedRouteSnapshot,
+  //   state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+
+  //   return this.auth.user$.pipe(
+  //     take(1),
+  //     map(user => !!user), // <-- map to boolean
+  //     tap(loggedIn => {
+  //       if (!loggedIn) {
+  //         console.log('access denied')
+  //         this.router.navigate(['/login']);
+  //       }
+  //     })
+  //   )
+  // }
+
   canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean> {
 
     return this.auth.user$.pipe(
       take(1),
-      map(user => !!user), // <-- map to boolean
-      tap(loggedIn => {
-        if (!loggedIn) {
-          console.log('access denied')
-          this.router.navigate(['/login']);
+      map(user => user && this.auth.canRead(user) ? true : false),
+      tap(canView => {
+        if (!canView) {
+          console.error('Access denied. Must have permission to view content')
         }
       })
-    )
+    );
+
   }
 
 }

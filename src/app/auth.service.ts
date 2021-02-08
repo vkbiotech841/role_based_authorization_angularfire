@@ -15,16 +15,14 @@ import { switchMap } from 'rxjs/operators';
 })
 export class AuthService {
 
-  // user$: Observable<User>;
-  user$: Observable<any>;
-  firebaseUser: any;
+  user$: Observable<User | null | undefined>;
+  // user$: Observable<any>;
 
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private router: Router
   ) {
-
     // Get the auth state, then fetch the Firestore user document or return null
     this.user$ = this.afAuth.authState.pipe(
       switchMap(user => {
@@ -38,33 +36,13 @@ export class AuthService {
       })
     )
 
-    // this.setUserDetailsToLocalStorage();
-
-
   }
-
-
-  // Getting owner details from firebase
-  setUserDetailsToLocalStorage() {
-    this.afAuth.authState.subscribe((user) => {
-      if (user) {
-        this.firebaseUser = user;
-        localStorage.setItem('owner_details', JSON.stringify(this.firebaseUser));
-        localStorage.setItem('owner_id', this.firebaseUser.uid);
-        localStorage.setItem('owner_email', this.firebaseUser.email);
-      } else {
-        localStorage.setItem('owner_details', 'null');
-        localStorage.setItem('owner_id', 'null');
-        localStorage.setItem('owner_email', 'null');
-      }
-    });
-  };
-
 
 
   async googleSignin() {
     const provider = new firebase.auth.GoogleAuthProvider();
     const credential = await this.afAuth.signInWithPopup(provider);
+    this.router.navigate(['/dashboard']);
     return this.updateUserData(credential.user);
   };
 
@@ -76,7 +54,10 @@ export class AuthService {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
-      photoURL: user.photoURL
+      photoURL: user.photoURL,
+      roles: {
+        subscriber: true
+      }
     }
     return userRef.set(data, { merge: true })
   };
@@ -85,4 +66,35 @@ export class AuthService {
     await this.afAuth.signOut();
     this.router.navigate(['/']);
   };
+
+
+  ///// Role-based Authorization //////
+
+  canRead(user: User): boolean {
+    const allowed: any = ['admin', 'editor', 'subscriber']
+    return this.checkAuthorization(user, allowed)
+  }
+
+  canEdit(user: User): boolean {
+    const allowed: any = ['admin', 'editor']
+    return this.checkAuthorization(user, allowed)
+  }
+
+  canDelete(user: User): boolean {
+    const allowed: any = ['admin']
+    return this.checkAuthorization(user, allowed)
+  }
+
+
+
+  // determines if user has matching role
+  private checkAuthorization(user: User, allowedRoles: []): boolean {
+    if (!user) return false
+    for (const role of allowedRoles) {
+      if (user.roles[role]) {
+        return true
+      }
+    }
+    return false
+  }
 }
