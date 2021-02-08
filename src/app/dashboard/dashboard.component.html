@@ -1,2 +1,28 @@
-<p>dashboard works!</p>
-<button (click)="auth.signOut()">Logout</button>
+<div class="container">
+    <div class="container-fluid">
+        <div>
+            <div *ngIf="auth.user$ | async as user">
+                <h3>Welcome !!!, {{ user.displayName }}</h3>
+                <img [src]="user.photoURL">
+                <p>UID: {{ user.uid }}</p>
+                <button class="btn btn-secondary" (click)="auth.signOut()">Logout</button>
+            </div>
+        </div>
+
+        <hr>
+
+        <div>
+            <div>
+                <h3>Only Admin can access this component</h3>
+                <button class="btn btn-secondary" [routerLink]="['/secret']">Secret Component</button>
+            </div>
+
+            <div>
+                <h3>Everyone can access this component</h3>
+                <button class="btn btn-secondary" [routerLink]="['/content']">Subscriber Component</button>
+            </div>
+
+        </div>
+
+    </div>
+</div>

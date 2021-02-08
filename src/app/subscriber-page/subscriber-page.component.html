@@ -1,21 +1,29 @@
-<p>subscriber-page works!</p>
+<div class="container">
+    <div class="container-fluid">
 
+        <div *ngIf="post$ | async as post">
+            <h1>{{ post?.title }}</h1>
+            <p>{{ post?.content }}</p>
+        </div>
 
+        <div>
+            <p> <b>Admin</b> can access: Delete, Edit and Read buttons</p>
+            <p> <b>Editor </b> can access: Edit and Read buttons</p>
+            <p> <b>Read </b> can access: Read button</p>
+        </div>
 
-<div *ngIf="post$ | async as post">
-    <h1>{{ post?.title }}</h1>
-    <p>{{ post?.content }}</p>
+        <button class="btn btn-secondary" (click)="deletePost()" *ngIf="auth.canDelete(user)">
+            Delete Post
+        </button>
+
+        <button class="btn btn-secondary" (click)="editPost()" *ngIf="auth.canEdit(user)">
+            Edit Post
+        </button>
+
+        <button class="btn btn-secondary" (click)="readPost()" *ngIf="auth.canRead(user)">
+            Read Post
+        </button>
+
+    </div>
+
 </div>
-
-<button class="button is-danger" (click)="deletePost()" *ngIf="auth.canDelete(user)">
-
-    Delete Post
-</button>
-
-<button class="button is-warning" (click)="editPost()" *ngIf="auth.canEdit(user)">
-    Edit Post
-</button>
-
-<button class="button is-warning" (click)="readPost()" *ngIf="auth.canRead(user)">
-    Edit Post
-</button>
