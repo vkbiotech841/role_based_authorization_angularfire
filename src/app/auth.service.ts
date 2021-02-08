@@ -23,6 +23,11 @@ export class AuthService {
     private afs: AngularFirestore,
     private router: Router
   ) {
+
+    this.getUserStateAndFetchUserDocumentFromFireStore();
+  }
+
+  getUserStateAndFetchUserDocumentFromFireStore() {
     // Get the auth state, then fetch the Firestore user document or return null
     this.user$ = this.afAuth.authState.pipe(
       switchMap(user => {
@@ -35,8 +40,7 @@ export class AuthService {
         }
       })
     )
-
-  }
+  };
 
 
   async googleSignin() {

@@ -5,15 +5,43 @@ service cloud.firestore {
     match /{document=**} {
       allow read, write: if true;
     }
-
-     match /users/{userId} {
-        allow write, read: if isOwner(userId);
-    }
-
-    // Reusable function to determine document ownership
-    function isOwner(userId) {
-        return request.auth.uid == userId
-    }
-    
   }
+
+  match /users/{userId} {
+        allow write, read: if isOwner(userId);
+
+        // Reusable function to determine document ownership
+    function isOwner(userId) {
+    return request.auth.uid == userId
+    }
+  }
+
+ 
+  // Rules for Any Document
+  match /posts/{document} {
+
+    function getRole(role) {
+    return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles[role]
+    }
+  
+    allow read: if getRole('subscriber') == true;
+    allow update: if getRole('editor') == true;
+    allow create, delete: if getRole('admin') == true;
+
+  }
+
+  // Rules for the User Document
+  match /users/{document} {
+
+    function getRole(role) {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles[role]
+    }
+
+    allow read;
+    allow create: if request.resource.data.roles.keys().hasAny(['admin', 'editor']) == false;
+    allow update: if getRole('admin') == true;
+  }
+
+
+
 }

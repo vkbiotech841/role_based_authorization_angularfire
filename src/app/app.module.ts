@@ -11,12 +11,16 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { SuperSecretComponent } from './super-secret/super-secret.component';
+import { SubscriberPageComponent } from './subscriber-page/subscriber-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserProfileComponent,
-    DashboardComponent
+    DashboardComponent,
+    SuperSecretComponent,
+    SubscriberPageComponent
   ],
   imports: [
     BrowserModule,
