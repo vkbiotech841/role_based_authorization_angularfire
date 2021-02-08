@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AuthService } from '../auth.service';
 import { User } from '../user.model';
+import { BlogService } from '../blog.service';
 
 @Component({
   selector: 'app-subscriber-page',
@@ -17,7 +18,8 @@ export class SubscriberPageComponent implements OnInit {
 
   constructor(
     private afs: AngularFirestore,
-    public auth: AuthService
+    public auth: AuthService,
+    private blogService: BlogService
   ) {
 
 
@@ -25,8 +27,7 @@ export class SubscriberPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUser();
-    this.postRef = this.afs.doc('posts/myTestPost');
-    this.post$ = this.postRef.valueChanges();
+    this.getAllBlogs();
   }
 
 
@@ -39,15 +40,27 @@ export class SubscriberPageComponent implements OnInit {
 
 
   editPost() {
-    this.postRef.update({ title: 'Edited Title!' })
+
   };
 
   deletePost() {
-    this.postRef.delete()
+
   };
 
   readPost() {
     console.log("reading post");
+  };
+
+  blogs: any[] = [];
+  getAllBlogs() {
+    this.blogService.getAllBlogs().subscribe(result => {
+      result.forEach(doc => {
+        this.blogs.push({ ...doc.data(), id: doc.id })
+      })
+      console.log("result", this.blogs);
+    }, error => {
+      console.error("error", error);
+    })
   };
 
 }

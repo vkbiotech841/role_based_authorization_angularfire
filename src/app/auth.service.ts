@@ -16,7 +16,7 @@ import { switchMap } from 'rxjs/operators';
 export class AuthService {
 
   user$: Observable<User | null | undefined>;
-  // user$: Observable<any>;
+  user: any;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -33,8 +33,15 @@ export class AuthService {
       switchMap(user => {
         // Logged in
         if (user) {
+          this.user = user;
+          localStorage.setItem('owner_id', this.user.uid);
+          localStorage.setItem('owner_email', this.user.email);
+          localStorage.setItem('owner_details', JSON.stringify(this.user));
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         } else {
+          localStorage.setItem('owner_id', null);
+          localStorage.setItem('owner_email', null);
+          localStorage.setItem('owner_details', null);
           // Logged out
           return of(null);
         }

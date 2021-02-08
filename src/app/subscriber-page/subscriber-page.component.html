@@ -1,10 +1,7 @@
 <div class="container">
     <div class="container-fluid">
 
-        <div *ngIf="post$ | async as post">
-            <h1>{{ post?.title }}</h1>
-            <p>{{ post?.content }}</p>
-        </div>
+
 
         <div>
             <p> <b>Admin</b> can access: Delete, Edit and Read buttons</p>
@@ -12,17 +9,45 @@
             <p> <b>Read </b> can access: Read button</p>
         </div>
 
-        <button class="btn btn-secondary" (click)="deletePost()" *ngIf="auth.canDelete(user)">
-            Delete Post
-        </button>
+        <div class="col-12 col-md-12 col-sm-12">
 
-        <button class="btn btn-secondary" (click)="editPost()" *ngIf="auth.canEdit(user)">
-            Edit Post
-        </button>
+            <div class="card mt-5 mb-5" *ngFor="let blog of blogs; let i = index">
+                <div class="card-header">
+                    <div class="row" style="justify-content: center;">
+                        <strong>Title: {{blog.title}}</strong>
+                    </div>
+                    <div class="row float-right">
+                        <button class="btn btn-secondary" (click)="deletePost()" *ngIf="auth.canDelete(user)">
+                            Delete Post
+                        </button>
 
-        <button class="btn btn-secondary" (click)="readPost()" *ngIf="auth.canRead(user)">
-            Read Post
-        </button>
+                        <button class="btn btn-secondary" (click)="editPost()" *ngIf="auth.canEdit(user)">
+                            Edit Post
+                        </button>
+
+                        <button class="btn btn-secondary" (click)="readPost()" *ngIf="auth.canRead(user)">
+                            Read Post
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    {{blog.blog}}
+                </div>
+                <div class="card-footer">
+                    <div class="float-right">
+                        <i>
+                            <strong>
+                                <small>Author:{{blog.writer}}</small>
+                            </strong>
+                        </i>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
 
     </div>
 

@@ -13,6 +13,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SuperSecretComponent } from './super-secret/super-secret.component';
 import { SubscriberPageComponent } from './subscriber-page/subscriber-page.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { SubscriberPageComponent } from './subscriber-page/subscriber-page.compo
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig), // firebase initilization
     AngularFirestoreModule, // firestore
