@@ -20,21 +20,34 @@ export class SubscriberPageComponent implements OnInit {
     public auth: AuthService
   ) {
 
+
   }
 
   ngOnInit(): void {
+    this.getUser();
     this.postRef = this.afs.doc('posts/myTestPost');
     this.post$ = this.postRef.valueChanges();
   }
 
 
+  getUser() {
+    this.auth.user$.subscribe(user => {
+      this.user = user;
+      console.log("userFrom Subscriber page", this.user);
+    });
+  };
+
+
   editPost() {
     this.postRef.update({ title: 'Edited Title!' })
-  }
-
+  };
 
   deletePost() {
     this.postRef.delete()
-  }
+  };
+
+  readPost() {
+    console.log("reading post");
+  };
 
 }
