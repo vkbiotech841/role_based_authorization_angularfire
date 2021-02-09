@@ -11,40 +11,46 @@
 
         <div class="col-12 col-md-12 col-sm-12">
 
-            <div class="card mt-5 mb-5" *ngFor="let blog of blogs; let i = index">
-                <div class="card-header">
-                    <div class="row" style="justify-content: center;">
-                        <strong>Title: {{blog.title}}</strong>
-                    </div>
-                    <div class="row float-right">
-                        <button class="btn btn-secondary" (click)="deletePost()" *ngIf="auth.canDelete(user)">
-                            Delete Post
-                        </button>
 
-                        <button class="btn btn-secondary" (click)="editPost()" *ngIf="auth.canEdit(user)">
-                            Edit Post
-                        </button>
 
-                        <button class="btn btn-secondary" (click)="readPost()" *ngIf="auth.canRead(user)">
-                            Read Post
-                        </button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    {{blog.blog}}
-                </div>
-                <div class="card-footer">
-                    <div class="float-right">
-                        <i>
-                            <strong>
-                                <small>Author:{{blog.writer}}</small>
-                            </strong>
-                        </i>
-                    </div>
-                </div>
+            <div class="card">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">S.No.</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Blog Summary</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let blog of blogs; let i = index">
+                            <th scope="row">{{i+1}}</th>
+                            <td>{{blog.title}}</td>
+                            <td>{{blog.blog | slice:0:20}}</td>
+                            <td>{{blog.writer}}</td>
+                            <td>
+                                <div class="d-flex">
 
+                                    <div class="m-2" style="outline: none; border: none;"
+                                        [routerLink]="['blog-details',blog.id]">
+                                        <img src="assets/images/basicLogo/eye_logo.svg" alt="" class="eye_logo"
+                                            placement="top" ngbTooltip="View & Edit" container="body">
+                                    </div>
+
+                                    <div class="m-2" style="outline: none; border: none;" data-toggle="modal"
+                                        data-target="#deleteQuestionModal" (click)="deleteBlogById(blog.id)">
+                                        <img src="assets/images/basicLogo/delete_btn_logo.svg" alt=""
+                                            class="delete_btn_logo" placement="top" ngbTooltip="Delete"
+                                            container="body">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-
         </div>
 
 

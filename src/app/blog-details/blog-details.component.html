@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="container-fluid">
+
+        <div *ngIf="blogDetails">
+            <div class="card mt-5 mb-5">
+                <div class="card-header">
+                    <div class="row" style="justify-content: center;">
+                        <strong>Title: {{blogDetails.title}}</strong>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    {{blogDetails.blog}}
+                </div>
+                <div class="card-footer">
+                    <div class="float-right">
+                        <i>
+                            <strong>
+                                <small>Author:{{blogDetails.writer}}</small>
+                            </strong>
+                        </i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

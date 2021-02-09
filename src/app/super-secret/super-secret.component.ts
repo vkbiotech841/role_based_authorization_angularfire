@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BlogService } from '../blog.service';
@@ -17,7 +18,8 @@ export class SuperSecretComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private blogService: BlogService
+    private blogService: BlogService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -43,7 +45,10 @@ export class SuperSecretComponent implements OnInit {
     if (this.createPost.valid) {
       const data = this.createPost.value;
       this.blogService.createBlog(data)
-        .then()
+        .then(result => {
+          this.router.navigate(['/content']);
+        }
+        )
         .catch(error => {
           console.error("error", error);
         })

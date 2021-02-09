@@ -13,7 +13,7 @@ import { BlogService } from '../blog.service';
 export class SubscriberPageComponent implements OnInit {
 
   postRef: AngularFirestoreDocument<any>;
-  post$: Observable<any>;
+  test$: Observable<any>;
   user: User;
 
   constructor(
@@ -27,7 +27,9 @@ export class SubscriberPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUser();
-    this.getAllBlogs();
+    // this.getAllBlogs();
+    this.getAllBlogsSnapshots();
+    this.getBlogValueChanges();
   }
 
 
@@ -52,6 +54,36 @@ export class SubscriberPageComponent implements OnInit {
   };
 
   blogs: any[] = [];
+
+  getAllBlogsSnapshots() {
+    this.blogService.getAllBlogsSnapshots().subscribe(result => {
+      this.blogs = result;
+      console.log("testing result", result);
+    }, error => {
+      console.error("error", error)
+    })
+  };
+
+
+
+  deleteBlogById(blogId) {
+    console.log("blogs", this.blogs);
+    this.blogService.deleteBlogById(blogId)
+      .then(result => {
+      }
+      )
+      .catch(error => {
+        console.error("error", error);
+      })
+  };
+
+  updateBlogId(blogId) {
+    this.blogService.uploadBlogById(blogId, this.blogs);
+  }
+
+
+
+
   getAllBlogs() {
     this.blogService.getAllBlogs().subscribe(result => {
       result.forEach(doc => {
@@ -62,5 +94,17 @@ export class SubscriberPageComponent implements OnInit {
       console.error("error", error);
     })
   };
+
+  // This method returns data as an array. but it constantly monitors any value changes. Hence, never ending obserservale.
+  getBlogValueChanges() {
+    this.blogService.getBlogByIdValueChanges().subscribe(result => {
+      console.log("valueChanges", result);
+    }, error => {
+      console.error("error", error);
+    })
+  }
+
+
+
 
 }

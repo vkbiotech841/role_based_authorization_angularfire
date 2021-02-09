@@ -1,3 +1,4 @@
+import { BlogDetailsComponent } from './blog-details/blog-details.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { NgModule } from '@angular/core';
@@ -27,7 +28,12 @@ const routes: Routes = [
     path: 'secret',
     component: SuperSecretComponent,
     canActivate: [AdminGuard]
-  }
+  },
+  {
+    path: 'content/blog-details/:blogId',
+    component: BlogDetailsComponent,
+    canActivate: [CanReadGuard]
+  },
 ];
 
 @NgModule({

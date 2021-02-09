@@ -14,6 +14,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { SuperSecretComponent } from './super-secret/super-secret.component';
 import { SubscriberPageComponent } from './subscriber-page/subscriber-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BlogDetailsComponent } from './blog-details/blog-details.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     UserProfileComponent,
     DashboardComponent,
     SuperSecretComponent,
-    SubscriberPageComponent
+    SubscriberPageComponent,
+    BlogDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AngularFireModule.initializeApp(environment.firebaseConfig), // firebase initilization
     AngularFirestoreModule, // firestore
     AngularFireAuthModule, // auth
-    AngularFireStorageModule, // storage
+    AngularFireStorageModule, NgbModule, // storage
   ],
   providers: [],
   bootstrap: [AppComponent]
