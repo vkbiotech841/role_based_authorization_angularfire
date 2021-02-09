@@ -54,7 +54,7 @@ export class AuthService {
     const provider = new firebase.auth.GoogleAuthProvider();
     const credential = await this.afAuth.signInWithPopup(provider);
     this.router.navigate(['/dashboard']);
-    this.activeUserStatus(credential.user);
+    // this.activeUserStatus(credential.user);
     return this.updateUserData(credential.user);
   };
 
@@ -67,6 +67,7 @@ export class AuthService {
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL,
+      status: 'active',
       roles: {
         subscriber: true
       }
