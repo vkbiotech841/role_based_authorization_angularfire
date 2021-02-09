@@ -13,24 +13,11 @@ export class AdminDashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.getAllLoggedInUsers();
     this.getAllLoggedInUsersValuChanges();
   }
 
   listOfLoggedInUsers: any[] = [];
-  uid: string;
-  getAllLoggedInUsers() {
-    this.userService.getAllLoggedInUsers().subscribe(result => {
-      result.forEach(doc => {
-        this.listOfLoggedInUsers.push(doc.data());
-      })
-      this.uid = localStorage.getItem("owner_id");
-      console.log("doc", this.listOfLoggedInUsers);
 
-    }, error => {
-      console.log("error", error);
-    })
-  }
 
   getAllLoggedInUsersValuChanges() {
     this.userService.getAllLoggedInUsersValueChanges().subscribe(result => {

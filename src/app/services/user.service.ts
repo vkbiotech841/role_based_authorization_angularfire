@@ -23,12 +23,6 @@ export class UserService {
   };
 
 
-  getAllLoggedInUsers() {
-    return this.firestore
-      .collection("users")
-      .get();
-  }
-
   getAllLoggedInUsersValueChanges(): Observable<any> {
     return this.firestore
       .collection("users")

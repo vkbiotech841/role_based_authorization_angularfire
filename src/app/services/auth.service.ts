@@ -19,7 +19,7 @@ export class AuthService {
   user: any;
 
   constructor(
-    private afAuth: AngularFireAuth,
+    private angularFireAuth: AngularFireAuth,
     private firestore: AngularFirestore,
     private router: Router
   ) {
@@ -29,7 +29,7 @@ export class AuthService {
 
   getUserStateAndFetchUserDocumentFromFireStore() {
     // Get the auth state, then fetch the Firestore user document or return null
-    this.user$ = this.afAuth.authState.pipe(
+    this.user$ = this.angularFireAuth.authState.pipe(
       switchMap(user => {
         // Logged in
         if (user) {
@@ -52,9 +52,8 @@ export class AuthService {
 
   async googleSignin() {
     const provider = new firebase.auth.GoogleAuthProvider();
-    const credential = await this.afAuth.signInWithPopup(provider);
+    const credential = await this.angularFireAuth.signInWithPopup(provider);
     this.router.navigate(['/dashboard']);
-    // this.activeUserStatus(credential.user);
     return this.updateUserData(credential.user);
   };
 
@@ -78,12 +77,12 @@ export class AuthService {
   async signOut() {
     const owner_id = localStorage.getItem("owner_id")
     this.inactiveUserStatus(owner_id);
-    await this.afAuth.signOut();
+    await this.angularFireAuth.signOut();
     this.router.navigate(['/']);
   };
 
 
-  ///// Role-based Authorization //////
+  ///// Role-based Authorization : STARTS HERE //////
 
   canRead(user: User): boolean {
     const allowed: any = ['admin', 'editor', 'subscriber']
@@ -112,6 +111,8 @@ export class AuthService {
     return false
   }
 
+  ///// Role-based Authorization : ENDS HERE //////
+
 
   userId: string;
 
@@ -127,16 +128,7 @@ export class AuthService {
       .update(updatedData)
   }
 
-  //////////// Active and inactive status /////////////////////
-
-  activeUserStatus(user: any) {
-    const data = {
-      status: "active",
-    }
-    return this.firestore
-      .doc(`users/${user.uid}`)
-      .update(data)
-  }
+  //////////// Active and inactive status : Starts here /////////////////////
 
   inactiveUserStatus(userId: any) {
     const data = {
@@ -146,6 +138,8 @@ export class AuthService {
       .doc(`users/${userId}`)
       .update(data)
   }
+
+  //////////// Active and inactive status : ends here /////////////////////
 
 
 }
