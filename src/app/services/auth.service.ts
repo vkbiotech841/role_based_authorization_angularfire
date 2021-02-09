@@ -20,7 +20,7 @@ export class AuthService {
 
   constructor(
     private afAuth: AngularFireAuth,
-    private afs: AngularFirestore,
+    private firestore: AngularFirestore,
     private router: Router
   ) {
 
@@ -37,7 +37,7 @@ export class AuthService {
           localStorage.setItem('owner_id', this.user.uid);
           localStorage.setItem('owner_email', this.user.email);
           localStorage.setItem('owner_details', JSON.stringify(this.user));
-          return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+          return this.firestore.doc<User>(`users/${user.uid}`).valueChanges();
         } else {
           localStorage.setItem('owner_id', null);
           localStorage.setItem('owner_email', null);
@@ -59,7 +59,7 @@ export class AuthService {
 
   private updateUserData(user: any) {
     // Sets user data to firestore on login
-    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
+    const userRef: AngularFirestoreDocument<User> = this.firestore.doc(`users/${user.uid}`);
 
     const data = {
       uid: user.uid,
@@ -97,7 +97,6 @@ export class AuthService {
   }
 
 
-
   // determines if user has matching role
   private checkAuthorization(user: User, allowedRoles: []): boolean {
     if (!user) return false;
@@ -108,4 +107,21 @@ export class AuthService {
     }
     return false
   }
+
+
+  userId: string;
+
+  getUserIdFromLocalStorage() {
+    this.userId = localStorage.getItem('owner_id');
+  };
+
+  selectRoleByUserId(updatedData) {
+    this.getUserIdFromLocalStorage();
+    return this.firestore
+      .collection("users")
+      .doc(this.userId)
+      .update(updatedData)
+  }
+
+
 }

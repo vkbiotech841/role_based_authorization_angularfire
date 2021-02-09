@@ -1,3 +1,4 @@
+import { DefineRoleComponent } from './define-role/define-role.component';
 import { BlogDetailsComponent } from './blog-details/blog-details.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
@@ -33,6 +34,11 @@ const routes: Routes = [
     path: 'content/blog-details/:blogId',
     component: BlogDetailsComponent,
     canActivate: [CanReadGuard]
+  },
+  {
+    path: 'define-role',
+    component: DefineRoleComponent,
+    canActivate: [AuthGuard]
   },
 ];
 

@@ -37,7 +37,6 @@ export class BlogService {
     private firestore: AngularFirestore,
     private storage: AngularFireStorage,
   ) {
-    // this.getUserIdFromLocalStorage();
   }
 
   userId: string;

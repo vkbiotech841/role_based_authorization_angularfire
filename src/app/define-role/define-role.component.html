@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12 col-md-12 col-sm-12">
+                <h3 class="row">Select You Role:</h3>
+            </div>
+            <br>
+
+            <div class="col-12 col-md-12 col-sm-12" *ngIf="userDetails">
+                <h5>Your current role is: {{userDetails.roles | json}}</h5>
+            </div>
+
+            <div class="mt-5 d-flex" style="justify-content: space-between;">
+                <div>
+                    <button class="btn btn-secondary" (click)="defineEditorRole()">Editor/Creator</button>
+                </div>
+                <div class="ml-5">
+                    <button class="btn btn-secondary" (click)="defineSubscriberRole()">Subscriber/Viewer</button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

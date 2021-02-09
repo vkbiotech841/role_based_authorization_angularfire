@@ -16,6 +16,7 @@ import { SubscriberPageComponent } from './subscriber-page/subscriber-page.compo
 import { ReactiveFormsModule } from '@angular/forms';
 import { BlogDetailsComponent } from './blog-details/blog-details.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DefineRoleComponent } from './define-role/define-role.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     DashboardComponent,
     SuperSecretComponent,
     SubscriberPageComponent,
-    BlogDetailsComponent
+    BlogDetailsComponent,
+    DefineRoleComponent
   ],
   imports: [
     BrowserModule,
