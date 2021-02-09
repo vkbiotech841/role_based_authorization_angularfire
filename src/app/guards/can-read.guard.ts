@@ -13,11 +13,6 @@ export class CanReadGuard implements CanActivate {
     private auth: AuthService) {
   }
 
-  // canActivate(
-  //   route: ActivatedRouteSnapshot,
-  //   state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-  //   return true;
-  // }
 
   canActivate(
     next: ActivatedRouteSnapshot,

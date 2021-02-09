@@ -7,13 +7,12 @@ import { tap, map, take } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class AdminGuard implements CanActivate {
-
+export class CanEditGuard implements CanActivate {
 
 
   constructor(
-    private auth: AuthService
-  ) { }
+    private auth: AuthService) {
+  }
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -21,10 +20,10 @@ export class AdminGuard implements CanActivate {
 
     return this.auth.user$.pipe(
       take(1),
-      map(user => user && user.roles.admin ? true : false),
-      tap(isAdmin => {
-        if (!isAdmin) {
-          console.error('Access denied - Admins only')
+      map(user => user && this.auth.canEdit(user) ? true : false),
+      tap(canEdit => {
+        if (!canEdit) {
+          console.error('Access denied. Must have permission to Edit content')
         }
       })
     );
