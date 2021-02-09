@@ -54,6 +54,7 @@ export class AuthService {
     const provider = new firebase.auth.GoogleAuthProvider();
     const credential = await this.afAuth.signInWithPopup(provider);
     this.router.navigate(['/dashboard']);
+    this.activeUserStatus(credential.user);
     return this.updateUserData(credential.user);
   };
 
@@ -74,6 +75,8 @@ export class AuthService {
   };
 
   async signOut() {
+    const owner_id = localStorage.getItem("owner_id")
+    this.inactiveUserStatus(owner_id);
     await this.afAuth.signOut();
     this.router.navigate(['/']);
   };
@@ -121,6 +124,26 @@ export class AuthService {
       .collection("users")
       .doc(this.userId)
       .update(updatedData)
+  }
+
+  //////////// Active and inactive status /////////////////////
+
+  activeUserStatus(user: any) {
+    const data = {
+      status: "active",
+    }
+    return this.firestore
+      .doc(`users/${user.uid}`)
+      .update(data)
+  }
+
+  inactiveUserStatus(userId: any) {
+    const data = {
+      status: "inactive",
+    }
+    return this.firestore
+      .doc(`users/${userId}`)
+      .update(data)
   }
 
 

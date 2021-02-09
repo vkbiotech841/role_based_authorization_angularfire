@@ -9,5 +9,6 @@ export interface User {
     photoURL?: string;
     displayName?: string;
     myCustomData?: string;
-    roles: Roles;
+    roles?: Roles;
+    status?: string;
 }

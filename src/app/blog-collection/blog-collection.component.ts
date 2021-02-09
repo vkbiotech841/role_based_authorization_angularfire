@@ -10,7 +10,7 @@ import { BlogService } from '../services/blog.service';
 })
 export class BlogCollectionComponent implements OnInit {
 
-  user: User;
+
 
   constructor(
     public auth: AuthService,
@@ -27,7 +27,7 @@ export class BlogCollectionComponent implements OnInit {
     this.getBlogValueChanges();
   }
 
-
+  user: User;
   getUser() {
     this.auth.user$.subscribe(user => {
       this.user = user;
@@ -73,11 +73,6 @@ export class BlogCollectionComponent implements OnInit {
         console.error("error", error);
       })
   };
-
-  updateBlogId(blogId) {
-    this.blogService.uploadBlogById(blogId, this.blogs);
-  }
-
 
 
 

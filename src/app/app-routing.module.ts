@@ -1,3 +1,4 @@
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { BlogCollectionComponent } from './blog-collection/blog-collection.component';
 import { CreateBlogComponent } from './create-blog/create-blog.component';
 import { LoginComponent } from './login/login.component';
@@ -41,6 +42,12 @@ const routes: Routes = [
     component: DefineRoleComponent,
     canActivate: [AuthGuard]
   },
+  {
+    path: 'admin-dashboard',
+    component: AdminDashboardComponent,
+    canActivate: [AdminGuard]
+  },
+
 ];
 
 @NgModule({

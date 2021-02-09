@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../models/user.model';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -13,6 +14,14 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getUser();
   }
+
+  user: User;
+  getUser() {
+    this.auth.user$.subscribe(user => {
+      this.user = user;
+    });
+  };
 
 }

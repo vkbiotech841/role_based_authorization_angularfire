@@ -17,6 +17,7 @@ import { DefineRoleComponent } from './define-role/define-role.component';
 import { LoginComponent } from './login/login.component';
 import { CreateBlogComponent } from './create-blog/create-blog.component';
 import { BlogCollectionComponent } from './blog-collection/blog-collection.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { BlogCollectionComponent } from './blog-collection/blog-collection.compo
     DefineRoleComponent,
     LoginComponent,
     CreateBlogComponent,
-    BlogCollectionComponent
+    BlogCollectionComponent,
+    AdminDashboardComponent
   ],
   imports: [
     BrowserModule,
