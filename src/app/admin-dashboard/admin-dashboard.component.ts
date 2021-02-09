@@ -13,7 +13,8 @@ export class AdminDashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getAllLoggedInUsers();
+    // this.getAllLoggedInUsers();
+    this.getAllLoggedInUsersValuChanges();
   }
 
   listOfLoggedInUsers: any[] = [];
@@ -28,6 +29,15 @@ export class AdminDashboardComponent implements OnInit {
 
     }, error => {
       console.log("error", error);
+    })
+  }
+
+  getAllLoggedInUsersValuChanges() {
+    this.userService.getAllLoggedInUsersValueChanges().subscribe(result => {
+      this.listOfLoggedInUsers = result;
+      console.log("result", result)
+    }, error => {
+      console.error("error", error);
     })
   }
 
