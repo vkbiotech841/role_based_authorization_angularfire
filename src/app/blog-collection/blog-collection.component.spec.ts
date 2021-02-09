@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SuperSecretComponent } from './super-secret.component';
+import { BlogCollectionComponent } from './blog-collection.component';
 
-describe('SuperSecretComponent', () => {
-  let component: SuperSecretComponent;
-  let fixture: ComponentFixture<SuperSecretComponent>;
+describe('BlogCollectionComponent', () => {
+  let component: BlogCollectionComponent;
+  let fixture: ComponentFixture<BlogCollectionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SuperSecretComponent ]
+      declarations: [ BlogCollectionComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SuperSecretComponent);
+    fixture = TestBed.createComponent(BlogCollectionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

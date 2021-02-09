@@ -4,11 +4,11 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { BlogService } from '../services/blog.service';
 
 @Component({
-  selector: 'app-super-secret',
-  templateUrl: './super-secret.component.html',
-  styleUrls: ['./super-secret.component.scss']
+  selector: 'app-create-blog',
+  templateUrl: './create-blog.component.html',
+  styleUrls: ['./create-blog.component.scss']
 })
-export class SuperSecretComponent implements OnInit {
+export class CreateBlogComponent implements OnInit {
 
   createPost: FormGroup;
 
@@ -55,4 +55,5 @@ export class SuperSecretComponent implements OnInit {
       console.log("blog", this.createPost.value);
     }
   };
+
 }

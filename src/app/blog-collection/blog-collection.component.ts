@@ -1,23 +1,18 @@
-import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AuthService } from '../services/auth.service';
 import { User } from '../models/user.model';
 import { BlogService } from '../services/blog.service';
 
 @Component({
-  selector: 'app-subscriber-page',
-  templateUrl: './subscriber-page.component.html',
-  styleUrls: ['./subscriber-page.component.scss']
+  selector: 'app-blog-collection',
+  templateUrl: './blog-collection.component.html',
+  styleUrls: ['./blog-collection.component.scss']
 })
-export class SubscriberPageComponent implements OnInit {
+export class BlogCollectionComponent implements OnInit {
 
-  postRef: AngularFirestoreDocument<any>;
-  test$: Observable<any>;
   user: User;
 
   constructor(
-    private afs: AngularFirestore,
     public auth: AuthService,
     private blogService: BlogService
   ) {
@@ -103,8 +98,5 @@ export class SubscriberPageComponent implements OnInit {
       console.error("error", error);
     })
   }
-
-
-
 
 }

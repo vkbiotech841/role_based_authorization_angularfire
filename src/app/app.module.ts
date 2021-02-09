@@ -9,24 +9,24 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
-import { UserProfileComponent } from './user-profile/user-profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { SuperSecretComponent } from './super-secret/super-secret.component';
-import { SubscriberPageComponent } from './subscriber-page/subscriber-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BlogDetailsComponent } from './blog-details/blog-details.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DefineRoleComponent } from './define-role/define-role.component';
+import { LoginComponent } from './login/login.component';
+import { CreateBlogComponent } from './create-blog/create-blog.component';
+import { BlogCollectionComponent } from './blog-collection/blog-collection.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserProfileComponent,
     DashboardComponent,
-    SuperSecretComponent,
-    SubscriberPageComponent,
     BlogDetailsComponent,
-    DefineRoleComponent
+    DefineRoleComponent,
+    LoginComponent,
+    CreateBlogComponent,
+    BlogCollectionComponent
   ],
   imports: [
     BrowserModule,

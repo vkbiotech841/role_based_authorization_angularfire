@@ -1,19 +1,19 @@
+import { BlogCollectionComponent } from './blog-collection/blog-collection.component';
+import { CreateBlogComponent } from './create-blog/create-blog.component';
+import { LoginComponent } from './login/login.component';
 import { DefineRoleComponent } from './define-role/define-role.component';
 import { BlogDetailsComponent } from './blog-details/blog-details.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
-import { SubscriberPageComponent } from './subscriber-page/subscriber-page.component';
 import { CanReadGuard } from './guards/can-read.guard';
-import { SuperSecretComponent } from './super-secret/super-secret.component';
 import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   {
     path: '',
-    component: UserProfileComponent,
+    component: LoginComponent,
   },
   {
     path: 'dashboard',
@@ -22,12 +22,12 @@ const routes: Routes = [
   },
   {
     path: 'content',
-    component: SubscriberPageComponent,
+    component: BlogCollectionComponent,
     canActivate: [CanReadGuard]
   },
   {
     path: 'secret',
-    component: SuperSecretComponent,
+    component: CreateBlogComponent,
     canActivate: [AdminGuard]
   },
   {
