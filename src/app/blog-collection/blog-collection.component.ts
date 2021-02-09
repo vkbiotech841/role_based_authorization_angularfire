@@ -36,17 +36,19 @@ export class BlogCollectionComponent implements OnInit {
   };
 
 
-  editPost() {
-
-  };
-
-  deletePost() {
-
-  };
-
   readPost() {
     console.log("reading post");
   };
+
+  editPost() {
+    console.log("Editing post");
+  };
+
+  deletePost() {
+    console.log("Deleted post");
+  };
+
+
 
   blogs: any[] = [];
 

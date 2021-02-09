@@ -34,13 +34,22 @@
                                 <div class="d-flex">
 
                                     <div class="m-2" style="outline: none; border: none;"
-                                        [routerLink]="['blog-details',blog.id]">
+                                        [routerLink]="['blog-details',blog.id]" *ngIf="auth.canRead(user)"
+                                        (click)="readPost()">
                                         <img src="assets/images/basicLogo/eye_logo.svg" alt="" class="eye_logo"
-                                            placement="top" ngbTooltip="View & Edit" container="body">
+                                            placement="top" ngbTooltip="View" container="body">
+                                    </div>
+
+                                    <div class="m-2" style="outline: none; border: none;"
+                                        [routerLink]="['blog-details',blog.id]" *ngIf="auth.canEdit(user);"
+                                        (click)="editPost()">
+                                        <img src="assets/images/basicLogo/edit_btn_logo.svg" alt="" class="eye_logo"
+                                            placement="top" ngbTooltip="Edit" container="body">
                                     </div>
 
                                     <div class="m-2" style="outline: none; border: none;" data-toggle="modal"
-                                        data-target="#deleteQuestionModal" (click)="deleteBlogById(blog.id)">
+                                        data-target="#deleteQuestionModal"
+                                        (click)="deleteBlogById(blog.id);deletePost()" *ngIf="auth.canEdit(user)">
                                         <img src="assets/images/basicLogo/delete_btn_logo.svg" alt=""
                                             class="delete_btn_logo" placement="top" ngbTooltip="Delete"
                                             container="body">

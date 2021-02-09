@@ -9,6 +9,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { CanReadGuard } from './guards/can-read.guard';
 import { AdminGuard } from './guards/admin.guard';
+import { CanEditGuard } from './guards/can-edit.guard';
 
 const routes: Routes = [
   {
@@ -26,9 +27,9 @@ const routes: Routes = [
     canActivate: [CanReadGuard]
   },
   {
-    path: 'secret',
+    path: 'create-blog',
     component: CreateBlogComponent,
-    canActivate: [AdminGuard]
+    canActivate: [CanEditGuard]
   },
   {
     path: 'content/blog-details/:blogId',
