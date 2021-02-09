@@ -1,9 +1,9 @@
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { AuthService } from '../auth.service';
-import { User } from '../user.model';
-import { BlogService } from '../blog.service';
+import { AuthService } from '../services/auth.service';
+import { User } from '../models/user.model';
+import { BlogService } from '../services/blog.service';
 
 @Component({
   selector: 'app-subscriber-page',
