@@ -9,6 +9,7 @@ export const environment = {
   firebaseConfig: {
     apiKey: "AIzaSyDhaVx4R8zOYZTohXSMilHpu8VVp0g7YHM",
     authDomain: "role-based-authorization-1694c.firebaseapp.com",
+    databaseURL: "https://role-based-authorization-1694c-default-rtdb.firebaseio.com",
     projectId: "role-based-authorization-1694c",
     storageBucket: "role-based-authorization-1694c.appspot.com",
     messagingSenderId: "926671723909",

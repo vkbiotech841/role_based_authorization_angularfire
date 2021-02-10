@@ -11,7 +11,8 @@
                 <h5>Your current role is: {{userDetails.roles | json}}</h5>
             </div>
 
-            <div class="mt-5 d-flex" style="justify-content: space-between;" *ngIf="!userDetails.roles.admin">
+
+            <div class="mt-5 d-flex" style="justify-content: space-between;" *ngIf="userDetails">
                 <div>
                     <button class="btn btn-secondary" (click)="defineEditorRole()">Editor/Creator</button>
                 </div>

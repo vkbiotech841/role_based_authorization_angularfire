@@ -1,3 +1,4 @@
+import { PushNotificationService } from './services/push-notification.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -8,6 +9,9 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
+
+
 import { environment } from 'src/environments/environment';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -18,6 +22,7 @@ import { LoginComponent } from './login/login.component';
 import { CreateBlogComponent } from './create-blog/create-blog.component';
 import { BlogCollectionComponent } from './blog-collection/blog-collection.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { AsyncPipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -31,15 +36,20 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
     AdminDashboardComponent
   ],
   imports: [
+    NgbModule,
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
+
     AngularFireModule.initializeApp(environment.firebaseConfig), // firebase initilization
     AngularFirestoreModule, // firestore
     AngularFireAuthModule, // auth
-    AngularFireStorageModule, NgbModule, // storage
+    AngularFireStorageModule, // storage
+    AngularFireMessagingModule, // cloud messaging
+
+
   ],
-  providers: [],
+  providers: [PushNotificationService, AsyncPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
