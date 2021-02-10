@@ -1,4 +1,3 @@
-import { MessagingService } from './services/messaging.service';
 import { PushNotificationService } from './services/push-notification.service';
 import { Component } from '@angular/core';
 
@@ -12,14 +11,12 @@ export class AppComponent {
 
   message;
   constructor(
-    private messagingService: MessagingService
+    private pushNotificationService: PushNotificationService
   ) { }
 
   ngOnInit() {
-    setTimeout(() => {
-      this.messagingService.requestPermission()
-      // this.messagingService.receiveMessage();
-      this.message = this.messagingService.currentMessage;
-    }, 5000);
+    this.pushNotificationService.requestPermission()
+    this.pushNotificationService.receiveMessage();
+    this.message = this.pushNotificationService.currentMessage;
   }
 }
