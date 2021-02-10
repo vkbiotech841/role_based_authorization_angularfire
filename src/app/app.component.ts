@@ -1,3 +1,4 @@
+import { MessagingService } from './services/messaging.service';
 import { PushNotificationService } from './services/push-notification.service';
 import { Component } from '@angular/core';
 
@@ -11,13 +12,14 @@ export class AppComponent {
 
   message;
   constructor(
-    private messagingService: PushNotificationService
+    private messagingService: MessagingService
   ) { }
 
   ngOnInit() {
-    const userId = 'user001';
-    this.messagingService.requestPermission(userId)
-    this.messagingService.receiveMessage()
-    this.message = this.messagingService.currentMessage
+    setTimeout(() => {
+      this.messagingService.requestPermission()
+      // this.messagingService.receiveMessage();
+      this.message = this.messagingService.currentMessage;
+    }, 5000);
   }
 }

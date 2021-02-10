@@ -23,6 +23,7 @@ import { CreateBlogComponent } from './create-blog/create-blog.component';
 import { BlogCollectionComponent } from './blog-collection/blog-collection.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AsyncPipe } from '@angular/common';
+import { MessagingService } from './services/messaging.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,7 @@ import { AsyncPipe } from '@angular/common';
 
 
   ],
-  providers: [PushNotificationService, AsyncPipe],
+  providers: [PushNotificationService, MessagingService, AsyncPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
